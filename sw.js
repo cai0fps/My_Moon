@@ -1,4 +1,4 @@
-const CACHE_NAME = 'N-cache-v3';
+const CACHE_NAME = 'N-cache-v4';
 
 const APP_SHELL = [
   './',
