@@ -27,6 +27,7 @@ export function initAudio(songs) {
     }
 
     function loadSong(index) {
+        audio.load()
         audio.src = songs[index].src;
         document.getElementById('songTitle').innerText = songs[index].title;
         document.getElementById('songArtist').innerText = songs[index].artist;
