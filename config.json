@@ -13,8 +13,7 @@
     { "title": "Pra Sempre Com Você", "artist": "Pra Sempre", "src": "videoplayback6.mp3" }
   ],
   "stories": [
-    { "type": "video", "src": "tela-wrapped/output.webm", "duration": 4000, "caption": "Sempre voce.😍" },
-    { "type": "image", "src": "tela-wrapped/fotos (6).webp", "duration": 5000, "caption": "Amo-te!❤️" },
+    { "type": "video", "src": "tela-wrapped/75.mp4", "duration": 4000, "caption": "Sempre voce.😍" },
     { "type": "image", "src": "tela-wrapped/70.jpg", "duration": 5000, "caption": "Nossos momentos ✨" },
     { "type": "image", "src": "tela-wrapped/72.jpg", "duration": 5000, "caption": "Você e eu 💖" },
     { "type": "image", "src": "tela-wrapped/74.jpg", "duration": 5000, "caption": "Perfeitos juntos 🥰" },
