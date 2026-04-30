@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dr-cache-v0';
+const CACHE_NAME = 'N-cache-v0';
 
 const APP_SHELL = [
   './',
