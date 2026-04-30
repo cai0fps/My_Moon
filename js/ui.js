@@ -106,12 +106,12 @@ function createHeart() {
 }
 
 function checkDay9Surprise() {
-    if (new Date().getDate() === 9) {
+    if (new Date().getDate() === 16) {
         const title = document.getElementById('overlayTitle');
-        if (title) title.innerText = "Feliz nosso dia! 🥹❤️";
+        if (title) title.innerText = "Feliz nosso dia!❤️";
         
-        const popup = document.getElementById('day9Popup');
-        const card = document.getElementById('day9Card');
+        const popup = document.getElementById('day16Popup');
+        const card = document.getElementById('day16Card');
         if (popup && card) {
             popup.classList.remove('hidden');
             popup.classList.add('flex');
@@ -125,7 +125,7 @@ function checkDay9Surprise() {
 }
 
 function closeDay9Popup() {
-    const popup = document.getElementById('day9Popup');
+    const popup = document.getElementById('day16Popup');
     if (popup) {
         popup.classList.replace('opacity-100', 'opacity-0');
         setTimeout(() => {
