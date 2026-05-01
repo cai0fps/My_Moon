@@ -18,6 +18,7 @@ export function initAudio(songs) {
     
     let isShuffle = false;
     let isRepeat = false;
+    let consecutiveErrors = 0; // Nova variável para contar falhas seguidas
 
     function restoreTime() {
         const savedTime = parseFloat(localStorage.getItem('mylove_currentTime'));
@@ -78,9 +79,23 @@ export function initAudio(songs) {
     prevBtn.addEventListener('click', prevSong);
     audio.addEventListener('ended', nextSong);
 
-    // NOVA FUNÇÃO: Tratamento de erro. Pula a música se o arquivo não existir ou for inválido.
+    // Zera o contador de erros se a música tocar com sucesso
+    audio.addEventListener('playing', () => {
+        consecutiveErrors = 0;
+    });
+
+    // Tratamento de erro aprimorado com trava anti-loop
     audio.addEventListener('error', (e) => {
-        console.error(`Falha ao carregar a música: ${songs[songIndex].src}. Pulando para a próxima...`);
+        console.error(`Falha ao carregar a música: ${songs[songIndex].src}.`);
+        consecutiveErrors++;
+        
+        // Se falhou tantas vezes quanto o total de músicas, para de tentar
+        if (consecutiveErrors >= songs.length) {
+            console.error("Nenhuma música pôde ser carregada. Verifique as pastas e nomes dos arquivos.");
+            return; 
+        }
+        
+        console.log("Pulando para a próxima...");
         nextSong();
     });
 
