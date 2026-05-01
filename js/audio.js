@@ -45,7 +45,7 @@ export function initAudio(songs) {
     }
 
     function togglePlay() {
-        if (audio.paused) audio.play().catch(e => console.error(e));
+        if (audio.paused) audio.play().catch(e => console.error("Erro ao tocar:", e));
         else audio.pause();
     }
 
@@ -63,20 +63,26 @@ export function initAudio(songs) {
         }
         localStorage.setItem('mylove_currentTime', '0');
         loadSong(songIndex);
-        audio.play().catch(e => console.error(e));
+        audio.play().catch(e => console.error("Erro ao tocar próxima:", e));
     }
 
     function prevSong() {
         songIndex = (songIndex - 1 + songs.length) % songs.length;
         localStorage.setItem('mylove_currentTime', '0');
         loadSong(songIndex);
-        audio.play().catch(e => console.error(e));
+        audio.play().catch(e => console.error("Erro ao tocar anterior:", e));
     }
 
     playBtn.addEventListener('click', togglePlay);
     nextBtn.addEventListener('click', nextSong);
     prevBtn.addEventListener('click', prevSong);
     audio.addEventListener('ended', nextSong);
+
+    // NOVA FUNÇÃO: Tratamento de erro. Pula a música se o arquivo não existir ou for inválido.
+    audio.addEventListener('error', (e) => {
+        console.error(`Falha ao carregar a música: ${songs[songIndex].src}. Pulando para a próxima...`);
+        nextSong();
+    });
 
     shuffleBtn.addEventListener('click', () => {
         isShuffle = !isShuffle;
