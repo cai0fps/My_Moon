@@ -18,7 +18,7 @@ export function initAudio(songs) {
     
     let isShuffle = false;
     let isRepeat = false;
-    let consecutiveErrors = 0; // Nova variável para contar falhas seguidas
+    let consecutiveErrors = 0;
 
     function restoreTime() {
         const savedTime = parseFloat(localStorage.getItem('mylove_currentTime'));
@@ -28,6 +28,10 @@ export function initAudio(songs) {
     }
 
     function loadSong(index) {
+        // DEPURAÇÃO: Mostra no console o caminho exato que o navegador está tentando acessar
+        const fullPath = new URL(songs[index].src, document.baseURI).href;
+        console.log(`🔍 Buscando áudio no caminho exato: ${fullPath}`);
+
         audio.src = songs[index].src;
         audio.load();
         document.getElementById('songTitle').innerText = songs[index].title;
@@ -79,19 +83,16 @@ export function initAudio(songs) {
     prevBtn.addEventListener('click', prevSong);
     audio.addEventListener('ended', nextSong);
 
-    // Zera o contador de erros se a música tocar com sucesso
     audio.addEventListener('playing', () => {
         consecutiveErrors = 0;
     });
 
-    // Tratamento de erro aprimorado com trava anti-loop
     audio.addEventListener('error', (e) => {
         console.error(`Falha ao carregar a música: ${songs[songIndex].src}.`);
         consecutiveErrors++;
         
-        // Se falhou tantas vezes quanto o total de músicas, para de tentar
         if (consecutiveErrors >= songs.length) {
-            console.error("Nenhuma música pôde ser carregada. Verifique as pastas e nomes dos arquivos.");
+            console.error("Nenhuma música pôde ser carregada. O loop foi interrompido para evitar travamentos.");
             return; 
         }
         
